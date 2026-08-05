@@ -51,14 +51,25 @@ export function persistenceMode(): 'blob' | 'local' {
 export async function getCatalog(): Promise<Zapatilla[]> {
   if (hasBlobToken()) {
     const existing = await readFromBlob();
-    if (existing) return existing;
+    // An empty catalog is treated as "never seeded" (e.g. a deploy that ran before
+    // Blob was connected fell through to the local fallback and never persisted
+    // anything to Blob) so it self-heals back to the starting collection instead
+    // of staying stuck empty.
+    if (existing && existing.length > 0) return existing;
     await writeToBlob(SEED_CATALOG);
     return SEED_CATALOG;
   }
 
   const existing = readLocalFallback();
-  if (existing) return existing;
-  writeLocalFallback(SEED_CATALOG);
+  if (existing && existing.length > 0) return existing;
+  try {
+    writeLocalFallback(SEED_CATALOG);
+  } catch (err) {
+    // The local file fallback is for `next dev`; on a read-only deployment
+    // filesystem (e.g. Vercel without Blob configured) this write can't
+    // succeed. Serve the seed from memory instead of failing the page.
+    console.warn('No se pudo escribir el respaldo local del catálogo', err);
+  }
   return SEED_CATALOG;
 }
 
