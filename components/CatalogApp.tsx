@@ -7,6 +7,7 @@ import { normalizeSearch } from '@/lib/format';
 import StatsBar from './StatsBar';
 import SneakerCard from './SneakerCard';
 import ItemModal from './ItemModal';
+import BackfillPanel from './BackfillPanel';
 
 const ESTADO_LABELS: Record<string, string> = {
   DS: 'DS (nuevo)',
@@ -72,6 +73,19 @@ export default function CatalogApp({
   const [orden, setOrden] = useState<SortKey>('recientes');
   const [modal, setModal] = useState<ModalState>(null);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [backfillAbierto, setBackfillAbierto] = useState(false);
+
+  const sinFoto = useMemo(() => items.filter((i) => !i.foto).length, [items]);
+
+  async function recargarCatalogo() {
+    try {
+      const res = await fetch('/api/items');
+      const json = await res.json();
+      if (res.ok && Array.isArray(json.items)) setItems(json.items as Zapatilla[]);
+    } catch {
+      // el panel ya muestra su propio error; el catálogo en pantalla sigue sirviendo
+    }
+  }
 
   const marcas = useMemo(
     () => Array.from(new Set(items.map((d) => d.marca).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es')),
@@ -191,6 +205,11 @@ export default function CatalogApp({
         <button className="btn btn-primary" onClick={() => setModal({ mode: 'add' })}>
           + Agregar par
         </button>
+        {sinFoto > 0 && (
+          <button className="btn" onClick={() => setBackfillAbierto(true)}>
+            Rellenar desde StockX ({sinFoto})
+          </button>
+        )}
       </div>
 
       <div className="grid-wrap">
@@ -207,6 +226,34 @@ export default function CatalogApp({
           )}
         </div>
       </div>
+
+      {backfillAbierto && (
+        <div
+          className="overlay"
+          role="presentation"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setBackfillAbierto(false);
+          }}
+        >
+          <div className="modal" role="dialog" aria-modal="true" aria-labelledby="backfill-title">
+            <div className="modal-head">
+              <div className="modal-title" id="backfill-title">
+                Rellenar desde StockX
+              </div>
+              <button
+                className="close-x"
+                onClick={() => setBackfillAbierto(false)}
+                aria-label="Cerrar"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="modal-body">
+              <BackfillPanel onDone={recargarCatalogo} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {modal?.mode === 'add' && (
         <ItemModal mode="add" onClose={() => setModal(null)} onSaved={handleSaved} />

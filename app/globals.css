@@ -664,3 +664,90 @@ select {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- BACKFILL (StockX + Firecrawl) ---------- */
+.backfill {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.backfill-lead {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.backfill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.backfill-list li {
+  display: flex;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px;
+  background: var(--bg-alt);
+}
+.backfill-list li.bad {
+  border-color: var(--bad);
+}
+.bf-photo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.bf-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.bf-photo .mono {
+  font-size: 9px;
+  color: var(--text-faint);
+}
+.bf-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  min-width: 0;
+}
+.bf-info strong {
+  font-size: 12px;
+  line-height: 1.3;
+}
+.bf-info .mono {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.bf-detalle {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.backfill-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.backfill-fallos {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 11px;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
