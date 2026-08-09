@@ -140,7 +140,8 @@ export async function GET(req: Request) {
       const items = await getCatalog();
       const pendientes = items.filter((i) => !i.foto);
       const limite = Math.min(40, Math.max(1, Number(params.get('limit')) || 20));
-      const tanda = pendientes.slice(0, limite);
+      const desde = Math.max(0, Number(params.get('offset')) || 0);
+      const tanda = pendientes.slice(desde, desde + limite);
       const encontrados = await Promise.all(tanda.map((i) => buscarImagenDirecta(i)));
 
       const porId = new Map(encontrados.filter((r) => r.ok).map((r) => [r.id, r]));
