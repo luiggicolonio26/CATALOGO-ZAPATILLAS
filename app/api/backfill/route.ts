@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getCatalog, saveCatalog } from '@/lib/store';
 import { hasFirecrawlKey, lookupOnStockX, type LookupResult } from '@/lib/firecrawl';
+import { buscarImagenDirecta } from '@/lib/stockx-directo';
 
 export const dynamic = 'force-dynamic';
 // Each StockX lookup costs several seconds, so the route needs the long ceiling
@@ -113,8 +114,6 @@ export async function POST(req: Request) {
  * Writing requires ?apply=1 so a bare GET stays a harmless preview.
  */
 export async function GET(req: Request) {
-  if (!hasFirecrawlKey()) return faltaKey();
-
   const params = new URL(req.url).searchParams;
 
   // Progress check that neither scrapes nor spends credits, so the fill can be
@@ -133,6 +132,42 @@ export async function GET(req: Request) {
       return manejarError(err);
     }
   }
+
+  // Free path: guess the StockX image URL and keep it only if it resolves.
+  // No Firecrawl credits involved, so this still works once they run out.
+  if (params.get('modo') === 'directo') {
+    try {
+      const items = await getCatalog();
+      const pendientes = items.filter((i) => !i.foto);
+      const limite = Math.min(40, Math.max(1, Number(params.get('limit')) || 20));
+      const tanda = pendientes.slice(0, limite);
+      const encontrados = await Promise.all(tanda.map((i) => buscarImagenDirecta(i)));
+
+      const porId = new Map(encontrados.filter((r) => r.ok).map((r) => [r.id, r]));
+      let aplicados = 0;
+      if (params.get('apply') === '1' && porId.size > 0) {
+        const actualizados = items.map((item) => {
+          const hit = porId.get(item.id);
+          if (!hit?.foto) return item;
+          aplicados += 1;
+          return { ...item, foto: hit.foto };
+        });
+        await saveCatalog(actualizados, items);
+      }
+
+      return NextResponse.json({
+        modo: 'directo',
+        procesados: tanda.length,
+        encontrados: porId.size,
+        aplicados,
+        restantesSinFoto: pendientes.length - aplicados
+      });
+    } catch (err) {
+      return manejarError(err);
+    }
+  }
+
+  if (!hasFirecrawlKey()) return faltaKey();
 
   try {
     const salida = await ejecutar({
