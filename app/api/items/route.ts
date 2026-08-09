@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       creadoEn: Date.now()
     };
     const updated = [...items, nuevo];
-    await saveCatalog(updated);
+    await saveCatalog(updated, items);
     return NextResponse.json({ item: nuevo }, { status: 201 });
   } catch (err) {
     if (err instanceof ValidationError) {

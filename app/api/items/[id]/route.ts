@@ -17,7 +17,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const updatedItem = { ...items[idx], ...parsed };
     const updated = [...items];
     updated[idx] = updatedItem;
-    await saveCatalog(updated);
+    await saveCatalog(updated, items);
     return NextResponse.json({ item: updatedItem });
   } catch (err) {
     if (err instanceof ValidationError) {
@@ -37,7 +37,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
       return NextResponse.json({ error: 'Ese par ya no existe en el catálogo.' }, { status: 404 });
     }
     const updated = items.filter((i) => i.id !== id);
-    await saveCatalog(updated);
+    await saveCatalog(updated, items);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error(err);
