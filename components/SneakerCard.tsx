@@ -20,6 +20,7 @@ export default function SneakerCard({ item, onOpen }: { item: Zapatilla; onOpen:
             src={item.foto}
             alt={item.nombre}
             loading="lazy"
+            referrerPolicy="no-referrer"
             onError={() => setPhotoFailed(true)}
           />
         ) : (

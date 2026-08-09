@@ -202,7 +202,7 @@ export default function ItemModal({
               <span className="uploading mono">SUBIENDO…</span>
             ) : form.foto ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={form.foto} alt="Vista previa" />
+              <img src={form.foto} alt="Vista previa" referrerPolicy="no-referrer" />
             ) : (
               <span className="mono" style={{ color: 'var(--text-faint)', fontSize: 11 }}>
                 SIN FOTO TODAVÍA

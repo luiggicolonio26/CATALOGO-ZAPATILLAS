@@ -138,7 +138,7 @@ export default function BackfillPanel({ onDone }: { onDone: () => void }) {
                 <div className="bf-photo">
                   {r.foto ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={r.foto} alt={r.nombre} />
+                    <img src={r.foto} alt={r.nombre} referrerPolicy="no-referrer" />
                   ) : (
                     <span className="mono">sin foto</span>
                   )}
