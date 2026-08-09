@@ -67,6 +67,9 @@ function toImageUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const url = value.trim();
   if (!/^https:\/\//i.test(url)) return null;
+  // StockX hands back a grey placeholder when a product has no photo of its own.
+  // Storing it would look like a loaded image instead of an obvious gap.
+  if (/placeholder/i.test(url)) return null;
   return upscaleStockXImage(url);
 }
 

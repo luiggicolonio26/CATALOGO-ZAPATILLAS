@@ -117,14 +117,23 @@ export async function GET(req: Request) {
 
   const params = new URL(req.url).searchParams;
   try {
-    return NextResponse.json(
-      await ejecutar({
-        dryRun: params.get('apply') !== '1',
-        soloSinFoto: params.get('todos') !== '1',
-        offset: Math.max(0, Number(params.get('offset')) || 0),
-        limit: Math.min(MAX_BATCH, Math.max(1, Number(params.get('limit')) || DEFAULT_BATCH))
-      })
-    );
+    const salida = await ejecutar({
+      dryRun: params.get('apply') !== '1',
+      soloSinFoto: params.get('todos') !== '1',
+      offset: Math.max(0, Number(params.get('offset')) || 0),
+      limit: Math.min(MAX_BATCH, Math.max(1, Number(params.get('limit')) || DEFAULT_BATCH))
+    });
+
+    // The per-row payload is long; an operator paging through the whole
+    // collection only needs the tally plus whatever refused to resolve.
+    if (params.get('compact') === '1') {
+      const { results, ...resumen } = salida;
+      return NextResponse.json({
+        ...resumen,
+        fallos: results.filter((r) => !r.ok).map((r) => `${r.codigo || '—'} ${r.nombre}: ${r.detalle}`)
+      });
+    }
+    return NextResponse.json(salida);
   } catch (err) {
     return manejarError(err);
   }
