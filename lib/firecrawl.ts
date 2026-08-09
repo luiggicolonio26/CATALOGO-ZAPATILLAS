@@ -40,11 +40,34 @@ function toPrice(value: unknown): number | null {
   return null;
 }
 
+/**
+ * StockX serves whatever thumbnail size the page happened to use — the search
+ * grid gives back 140x75, which is unusably blurry in a card. The size lives in
+ * query params, so ask the same CDN for a large square instead.
+ */
+function upscaleStockXImage(url: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return url;
+  }
+  if (!/(^|\.)stockx\.com$/i.test(parsed.hostname)) return url;
+
+  parsed.searchParams.set('w', '900');
+  parsed.searchParams.set('h', '900');
+  parsed.searchParams.set('q', '90');
+  parsed.searchParams.set('fit', 'fill');
+  parsed.searchParams.set('bg', 'FFFFFF');
+  parsed.searchParams.delete('dpr');
+  return parsed.toString();
+}
+
 function toImageUrl(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const url = value.trim();
   if (!/^https:\/\//i.test(url)) return null;
-  return url;
+  return upscaleStockXImage(url);
 }
 
 /**
