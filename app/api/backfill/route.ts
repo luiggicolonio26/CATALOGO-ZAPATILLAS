@@ -116,6 +116,24 @@ export async function GET(req: Request) {
   if (!hasFirecrawlKey()) return faltaKey();
 
   const params = new URL(req.url).searchParams;
+
+  // Progress check that neither scrapes nor spends credits, so the fill can be
+  // verified between batches.
+  if (params.get('stats') === '1') {
+    try {
+      const items = await getCatalog();
+      return NextResponse.json({
+        total: items.length,
+        conFoto: items.filter((i) => i.foto).length,
+        sinFoto: items.filter((i) => !i.foto).length,
+        conReventaDistinta: items.filter((i) => i.precioReventa !== i.costoRetail).length,
+        muestra: items.slice(0, 3).map((i) => ({ codigo: i.codigo, foto: i.foto ? 'si' : 'no' }))
+      });
+    } catch (err) {
+      return manejarError(err);
+    }
+  }
+
   try {
     const salida = await ejecutar({
       dryRun: params.get('apply') !== '1',
