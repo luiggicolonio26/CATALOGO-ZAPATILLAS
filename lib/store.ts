@@ -79,7 +79,12 @@ async function readFromBlob(): Promise<ReadOutcome> {
   const entry = blobs.find((b) => b.pathname === CATALOG_PATHNAME);
   if (!entry) return { estado: 'empty' };
 
-  const parsed = parseCatalogFile(await fetchJson(entry.downloadUrl || entry.url));
+  // The pathname is stable (no random suffix), so the blob CDN happily serves a
+  // cached copy of the previous version. Reading stale data here silently loses
+  // writes: each caller would edit an old catalog and save over the newer one.
+  const fresco = new URL(entry.downloadUrl || entry.url);
+  fresco.searchParams.set('v', Date.now().toString(36));
+  const parsed = parseCatalogFile(await fetchJson(fresco.toString()));
   if (!parsed) throw new Error('El catálogo guardado en Blob tiene un formato inesperado.');
   return { estado: 'found', file: parsed };
 }
@@ -89,7 +94,10 @@ async function writeToBlob(items: Zapatilla[], pathname = CATALOG_PATHNAME): Pro
     access: 'public',
     addRandomSuffix: false,
     allowOverwrite: true,
-    contentType: 'application/json'
+    contentType: 'application/json',
+    // The catalog is read back immediately after every write, so it must never
+    // sit in the CDN; the default max-age would hand out a stale copy.
+    cacheControlMaxAge: 0
   });
 }
 
