@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="La dieta BARF diaria de Gigi, ajustada a su peso, su edad y su ejercicio.">
+<meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17120e" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="Dieta de Gigi">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239a5b2e'%3E%3Cellipse cx='6.4' cy='9.6' rx='2.5' ry='3.2'/%3E%3Cellipse cx='17.6' cy='9.6' rx='2.5' ry='3.2'/%3E%3Cellipse cx='10' cy='5' rx='2.2' ry='2.9'/%3E%3Cellipse cx='14' cy='5' rx='2.2' ry='2.9'/%3E%3Cpath d='M12 12.4c3 0 5.4 2.2 5.4 4.8 0 2-1.6 3.2-3.4 3.2-1 0-1.4-.4-2-.4s-1 .4-2 .4c-1.8 0-3.4-1.2-3.4-3.2 0-2.6 2.4-4.8 5.4-4.8z'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239a5b2e'%3E%3Cellipse cx='6.4' cy='9.6' rx='2.5' ry='3.2'/%3E%3Cellipse cx='17.6' cy='9.6' rx='2.5' ry='3.2'/%3E%3Cellipse cx='10' cy='5' rx='2.2' ry='2.9'/%3E%3Cellipse cx='14' cy='5' rx='2.2' ry='2.9'/%3E%3Cpath d='M12 12.4c3 0 5.4 2.2 5.4 4.8 0 2-1.6 3.2-3.4 3.2-1 0-1.4-.4-2-.4s-1 .4-2 .4c-1.8 0-3.4-1.2-3.4-3.2 0-2.6 2.4-4.8 5.4-4.8z'/%3E%3C/svg%3E">
+<title>Dieta de Gigi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* mismo colchon de zonas seguras que usa el visor de artifacts */
+  :root {
+    color-scheme: light dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<style>
+  :root {
+    --ground: #f6f1e9;
+    --surface: #fffdfa;
+    --surface-2: #efe7db;
+    --line: #e2d7c6;
+    --line-strong: #c9b9a2;
+    --ink: #2a211a;
+    --ink-2: #5d5145;
+    --ink-3: #8a7c6d;
+    --accent: #9a5b2e;
+    --accent-soft: #f5e4d2;
+    --on-accent: #fffdfa;
+    --warn: #8a6410;
+    --warn-bg: #fbf0d4;
+    --warn-line: #e5c988;
+    --alert: #96412a;
+    --alert-bg: #fbe4dc;
+    --alert-line: #e3ab96;
+    --done: #a2968a;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+
+    --r: 16px;
+    --sombra: 0 1px 2px rgba(42, 33, 26, .05), 0 4px 14px rgba(42, 33, 26, .05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #17120e;
+      --surface: #211a14;
+      --surface-2: #2c231b;
+      --line: #3a2e24;
+      --line-strong: #4e3f32;
+      --ink: #f2ebe2;
+      --ink-2: #bdb0a2;
+      --ink-3: #8e8175;
+      --accent: #e0a06a;
+      --accent-soft: #35251a;
+      --on-accent: #1a120c;
+      --warn: #e8c37a;
+      --warn-bg: #302614;
+      --warn-line: #574526;
+      --alert: #f0ab92;
+      --alert-bg: #351a12;
+      --alert-line: #5f3427;
+      --done: #7d7165;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #17120e;
+    --surface: #211a14;
+    --surface-2: #2c231b;
+    --line: #3a2e24;
+    --line-strong: #4e3f32;
+    --ink: #f2ebe2;
+    --ink-2: #bdb0a2;
+    --ink-3: #8e8175;
+    --accent: #e0a06a;
+    --accent-soft: #35251a;
+    --on-accent: #1a120c;
+    --warn: #e8c37a;
+    --warn-bg: #302614;
+    --warn-line: #574526;
+    --alert: #f0ab92;
+    --alert-bg: #351a12;
+    --alert-line: #5f3427;
+    --done: #7d7165;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.45;
+    margin: 0;
+    padding-inline: 16px;
+    padding-block: 0 48px;
+    max-width: 640px;
+    margin-inline: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  /* ---------- CABECERA ---------- */
+  .masthead {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: var(--ground);
+    padding-block: 14px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .masthead-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .nombre-fila { display: flex; align-items: center; gap: 9px; }
+  .huella {
+    width: 26px; height: 26px;
+    flex: 0 0 auto;
+    color: var(--accent);
+  }
+  .nombre {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .linaje {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--ink-3);
+    margin-top: 3px;
+  }
+  .fecha {
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .resumen {
+    display: flex;
+    gap: 0;
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--sombra);
+  }
+  .resumen div {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 9px;
+    border-right: 1px solid var(--line);
+  }
+  .resumen div:last-child { border-right: none; }
+  .resumen .valor {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .resumen .valor .u {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-left: 1px;
+  }
+  .resumen .etiq {
+    white-space: nowrap;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  /* ---------- DIAS ---------- */
+  .dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 14px;
+  }
+  .dia {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    border-radius: 999px;
+    padding: 9px 0 8px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .dia[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .dia .hoy-punto {
+    display: block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin: 3px auto 0;
+  }
+  .dia[aria-pressed="true"] .hoy-punto { background: currentColor; }
+
+  /* ---------- AVISOS ---------- */
+  .aviso {
+    border-radius: var(--r);
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-top: 14px;
+    border: 1px solid;
+  }
+  .aviso strong { font-weight: 700; }
+  .aviso.alerta { background: var(--alert-bg); border-color: var(--alert-line); color: var(--alert); }
+  .aviso.ojo { background: var(--warn-bg); border-color: var(--warn-line); color: var(--warn); }
+  .aviso-tit {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 3px;
+    opacity: 0.85;
+  }
+
+  /* ---------- RUTINA ---------- */
+  .rutina { list-style: none; margin: 10px 0 0; padding: 0; }
+  .paso {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .paso:last-child { border-bottom: none; }
+  .paso-marca {
+    flex: 0 0 auto;
+    width: 30px;
+    text-align: center;
+    padding-top: 1px;
+  }
+  .paso-marca .bolita {
+    display: inline-block;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+  }
+  .paso.ejercicio .paso-marca .bolita {
+    border-color: var(--warn);
+    background: var(--warn-bg);
+  }
+  .paso-cuerpo { flex: 1; min-width: 0; }
+  .paso-qué {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .paso-cuando {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin-top: 1px;
+  }
+  .paso-gramos {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .paso.ejercicio .paso-qué { color: var(--warn); }
+
+  /* ---------- SECCIONES DEL PLAN ---------- */
+  .bloque { margin-top: 22px; }
+  .bloque-tit {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--accent-soft);
+  }
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .fila {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 2px;
+    border-bottom: 1px solid var(--line);
+  }
+  .fila:last-child { border-bottom: none; }
+  .tick {
+    appearance: none;
+    flex: 0 0 auto;
+    width: 28px; height: 28px;
+    margin: 1px 0 0;
+    border: 2px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--surface);
+    cursor: pointer;
+    position: relative;
+  }
+  .tick:checked { background: var(--accent); border-color: var(--accent); }
+  .tick:checked::after {
+    content: "";
+    position: absolute;
+    left: 9px; top: 5px;
+    width: 6px; height: 12px;
+    border: solid var(--on-accent);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(42deg);
+  }
+  .tick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fila-texto { flex: 1; min-width: 0; }
+  .ingrediente { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; }
+  .nota-fila { font-size: 12.5px; color: var(--ink-3); margin-top: 1px; }
+  .cantidad {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-align: right;
+    flex: 0 0 auto;
+  }
+  .equiv {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    letter-spacing: 0;
+  }
+  .fila.hecho .ingrediente,
+  .fila.hecho .cantidad { color: var(--done); text-decoration: line-through; }
+  .fila.hecho .nota-fila, .fila.hecho .equiv { color: var(--done); }
+  .chip-confirmar, .chip-reemplazo {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    border-radius: 999px;
+    padding: 1px 7px;
+    margin-left: 6px;
+    vertical-align: 1px;
+  }
+  .chip-confirmar { color: var(--warn); background: var(--warn-bg); border: 1px solid var(--warn-line); }
+  .chip-reemplazo { color: var(--accent); background: var(--accent-soft); }
+
+  /* ---------- TABLA MES A MES ---------- */
+  .tabla-wrap { overflow-x: auto; margin-top: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td {
+    text-align: right;
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  th:first-child, td:first-child { text-align: left; }
+  td { font-family: var(--font-mono); font-weight: 500; }
+  td:first-child { font-family: var(--font-body); font-weight: 600; }
+  tr.actual td { background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+  .corte-nl {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--ink-3);
+    font-style: normal;
+  }
+
+  /* ---------- AJUSTES ---------- */
+  details.ajustes {
+    margin-top: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+  }
+  details.ajustes > summary {
+    cursor: pointer;
+    padding: 13px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    list-style: none;
+  }
+  details.ajustes > summary::-webkit-details-marker { display: none; }
+  details.ajustes > summary::after { content: " ▾"; color: var(--ink-3); }
+  details.ajustes[open] > summary::after { content: " ▴"; }
+  .ajustes-cuerpo {
+    padding: 14px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .campo { display: flex; flex-direction: column; gap: 5px; }
+  .campo label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .campo input, .campo select {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    padding: 10px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--ground);
+    color: var(--ink);
+    width: 100%;
+  }
+  .campo select { font-family: var(--font-body); }
+  .campo input:focus-visible, .campo select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .fila-check { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+  .fila-check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); }
+  .fila-check small { display: block; color: var(--ink-3); font-size: 12px; }
+  .ayuda { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
+
+  .pie {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+  .pie p { margin: 0 0 9px; }
+  .pie strong { color: var(--ink-2); }
+
+  @media (max-width: 380px) {
+    .resumen { flex-wrap: wrap; }
+    .resumen div { flex: 1 1 50%; border-bottom: 1px solid var(--line); }
+    .ingrediente { font-size: 15px; }
+    .cantidad { font-size: 16px; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div>
+      <div class="nombre-fila">
+        <svg class="huella" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <ellipse cx="6.4" cy="9.6" rx="2.5" ry="3.2"/>
+          <ellipse cx="17.6" cy="9.6" rx="2.5" ry="3.2"/>
+          <ellipse cx="10" cy="5" rx="2.2" ry="2.9"/>
+          <ellipse cx="14" cy="5" rx="2.2" ry="2.9"/>
+          <path d="M12 12.4c3 0 5.4 2.2 5.4 4.8 0 2-1.6 3.2-3.4 3.2-1 0-1.4-.4-2-.4s-1 .4-2 .4c-1.8 0-3.4-1.2-3.4-3.2 0-2.6 2.4-4.8 5.4-4.8z"/>
+        </svg>
+        <div class="nombre">Gigi</div>
+      </div>
+      <div class="linaje">Cane Corso · X-Man Barcelona</div>
+    </div>
+    <div class="fecha" id="fechaHoy">—</div>
+  </div>
+  <div class="resumen">
+    <div>
+      <div class="valor" id="vEdad">—</div>
+      <div class="etiq">Edad</div>
+    </div>
+    <div>
+      <div class="valor" id="vPeso">—</div>
+      <div class="etiq">Peso</div>
+    </div>
+    <div>
+      <div class="valor" id="vRacion">—</div>
+      <div class="etiq">% peso</div>
+    </div>
+    <div>
+      <div class="valor" id="vTotal">—</div>
+      <div class="etiq">Hoy come</div>
+    </div>
+  </div>
+  <div class="dias" id="dias"></div>
+</header>
+
+<main>
+  <div class="aviso alerta">
+    <span class="aviso-tit">Lo más importante del día</span>
+    Gigi es de tórax profundo y corre fuerte dos veces al día: comer pegado al ejercicio es el
+    riesgo de <strong>torsión gástrica</strong>. Dejá <strong>1 hora sin comida antes</strong> de
+    cada carrera y <strong>esperá 1 hora después</strong> para darle su ración. Nunca toda la
+    comida de una sola vez.
+  </div>
+
+  <section class="bloque">
+    <h2 class="bloque-tit">Cómo repartir el día</h2>
+    <ul class="rutina" id="rutina"></ul>
+  </section>
+
+  <div id="avisos"></div>
+  <div id="plan"></div>
+
+  <section class="bloque">
+    <h2 class="bloque-tit">Cuánto come según crece</h2>
+    <p class="ayuda" style="margin:8px 0 0;">
+      La ración baja en porcentaje a medida que madura, pero como ella sigue ganando peso, la
+      cantidad en gramos se mantiene bastante pareja. Una hembra de Cane Corso suele rondar los
+      40–45 kg de adulta y termina de crecer cerca de los 24 meses. Pesala una vez al mes y
+      actualizá el peso en Ajustes.
+    </p>
+    <div class="tabla-wrap">
+      <table id="tablaMeses">
+        <thead>
+          <tr><th>Edad</th><th>% del peso</th><th>Con su peso y ejercicio de hoy</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <h2 class="bloque-tit">Si cambiás de corte</h2>
+    <p class="ayuda" style="margin:8px 0 0;">
+      Lo que importa no es qué parte del pollo sea, sino <strong>cuánto hueso trae</strong>. Cada
+      corte trae una proporción distinta, así que la cantidad cambia. Esta columna te dice cuánto
+      poner hoy para que el hueso quede igual — el resto del día se completa con carne sin hueso.
+    </p>
+    <div class="tabla-wrap">
+      <table id="tablaCortes">
+        <thead>
+          <tr><th>Corte</th><th>Hueso</th><th>Hoy pondrías</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="ayuda" style="margin:10px 0 0;">
+      Cuanto menos hueso trae un corte, más cantidad entra — y menos carne aparte hay que comprar.
+      Con contramuslo casi no necesitás nada más.
+    </p>
+  </section>
+
+  <details class="ajustes" id="ajustes">
+    <summary>Ajustes de Gigi</summary>
+    <div class="ajustes-cuerpo">
+      <div class="campo">
+        <label for="fNacimiento">Fecha de nacimiento</label>
+        <input type="date" id="fNacimiento">
+        <span class="ayuda">La edad se recalcula sola cada mes.</span>
+      </div>
+      <div class="campo">
+        <label for="fPeso">Peso actual (kg)</label>
+        <input type="number" id="fPeso" min="3" max="80" step="0.5">
+      </div>
+      <div class="campo">
+        <label for="fActividad">Ejercicio diario</label>
+        <select id="fActividad">
+          <option value="baja">Poco — paseos tranquilos</option>
+          <option value="normal">Normal — 1 hora suave</option>
+          <option value="alta">Alta — 2 horas de carrera</option>
+          <option value="muyalta">Muy alta — más de 2 h intensas</option>
+        </select>
+        <span class="ayuda">Con «alta» la ración sube un 20 % sobre la base de crecimiento.</span>
+      </div>
+      <div class="campo">
+        <label for="fTomas">Tomas por día</label>
+        <select id="fTomas">
+          <option value="2">2 tomas</option>
+          <option value="3">3 tomas</option>
+        </select>
+        <span class="ayuda">En razas de tórax profundo conviene repartir en 3 y no dar raciones enormes.</span>
+      </div>
+
+      <div class="fila-check">
+        <input type="checkbox" id="fEsterilizada">
+        <label for="fEsterilizada"><span>Gigi está <strong>esterilizada</strong>
+          <small>Baja la ración un 20 %: después de la operación gasta bastante menos.</small></span></label>
+      </div>
+      <div class="fila-check">
+        <input type="checkbox" id="fVitE">
+        <label for="fVitE"><span>Le damos <strong>Vitamina E</strong>
+          <small>Compensa el desgaste que produce el aceite de pescado.</small></span></label>
+      </div>
+      <div class="fila-check">
+        <input type="checkbox" id="fCosequin">
+        <label for="fCosequin"><span>Le damos <strong>Cosequin Advance</strong>
+          <small>Reemplaza la glucosamina del plan, no se suma.</small></span></label>
+      </div>
+      <div class="fila-check">
+        <input type="checkbox" id="fLupo">
+        <label for="fLupo"><span>Le damos <strong>Lupo Aktiv Biotine Complex</strong>
+          <small>Reemplaza la biotina líquida del plan, no se suma.</small></span></label>
+      </div>
+
+      <p class="ayuda">
+        Los ajustes quedan guardados en este teléfono. Quien abra el enlace en otro, los carga
+        una vez ahí también.
+      </p>
+    </div>
+  </details>
+
+  <section class="pie">
+    <p><strong>De dónde sale.</strong> Es el plan semanal de Juanma Morato para Gigi (su referencia:
+    6 meses, 28 kg). Se respeta su rotación — cada día trae una víscera, una fruta y una hierba
+    distinta a propósito — y solo se ajustan las cantidades a su peso, su edad y su ejercicio.</p>
+
+    <p><strong>Crecer rápido es el riesgo de la raza.</strong> En un Cane Corso en crecimiento, pasarse
+    de comida acelera el aumento de peso y carga las articulaciones mientras todavía se están
+    formando. Por eso la ración sigue su peso real y no lo empuja: si la ves ganar peso muy rápido,
+    es tema de consulta, no de subir la cantidad.</p>
+
+    <p><strong>Es hembra, y a esta edad eso importa.</strong> El primer celo en un Cane Corso suele
+    llegar entre los 9 y los 14 meses, así que puede aparecer en cualquier momento. Alrededor del
+    celo es normal que coma menos unos días y luego recupere: no hay que forzarla ni compensar al
+    día siguiente. Si en algún momento la esterilizan, activá la casilla en Ajustes — el gasto
+    energético baja bastante y la ración tiene que bajar con él.</p>
+
+    <p><strong>Por qué el pollo va partido en dos.</strong> Las alitas son de las piezas con más
+    hueso (cerca del 45 % de su peso). Si todo el pollo del día fueran alitas, el hueso llegaría al
+    25–35 % de la dieta, cuando la referencia es 10–15 %. Por eso las alitas quedan como la parte
+    con hueso y el resto va deshuesado: así el aporte queda entre 8 y 13 %. <strong>Pesalas por
+    separado</strong>, no las intercambies.</p>
+
+    <p><strong>Qué hueso nunca.</strong> Solo huesos de ave o conejo, y siempre crudos: el hueso
+    cocido se astilla. Nada de huesos de carga de vaca o cordero (fémur, caña) — son tan duros que
+    parten dientes. Para variar la carne sin hueso podés usar vaca, pavo, cordero o conejo: rotar
+    proteínas es mejor que darle siempre pollo.</p>
+
+    <p><strong>Cómo comprobar que el hueso está bien.</strong> Miralo en las heces: si salen muy
+    duras, blanquecinas y desmenuzables, hay hueso de más. Si salen muy blandas, falta. No agregues
+    suplementos de calcio sin que lo indique el veterinario — en un cachorro de raza grande el
+    exceso de calcio es tan problemático como la falta.</p>
+
+    <p><strong>Aceites y suplementos van en dosis fija</strong>, no escalan con el peso como la
+    comida: el aceite de salmón son 10 pulsaciones del dosificador, y Cosequin y Lupo se dan según
+    la etiqueta del envase. Si querés ajustarlos al peso de Gigi, es consulta con Juanma o el
+    veterinario.</p>
+
+    <p><strong>Esto no reemplaza al veterinario.</strong> Las dosis de Cosequin y Lupo salen siempre
+    de la etiqueta según el peso de Gigi.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     Semana de Juanma, tal cual. Referencia: 6 meses / 28 kg, actividad
+     normal. `g` escala con peso, edad y ejercicio; `fijo` no se toca.
+     --------------------------------------------------------------- */
+  var REF_EDAD = 6, REF_PESO = 28;
+
+  function item(nombre, gramos, opt) {
+    opt = opt || {};
+    return {
+      nombre: nombre, g: gramos, unidad: opt.unidad || "g",
+      equiv: opt.equiv || null, nota: opt.nota || null,
+      fijo: opt.fijo || null, confirmar: !!opt.confirmar, reemplazo: false
+    };
+  }
+  function yogur(gramos, cucharadas) {
+    return item("Yogur natural", gramos, { equiv: cucharadas + " cucharadas", nota: "sin azúcar" });
+  }
+
+  var SEMANA = {
+    1: {
+      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 600), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      viscera:  [ item("Molleja de pollo", 150) ],
+      verde:    [ item("Ensaladilla", 105), item("Manzana", 60), item("Zanahoria", 45) ],
+      lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
+      extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
+    },
+    2: {
+      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 750, { nota: "hoy sin pescado" }) ],
+      viscera:  [ item("Hígado de pollo", 150) ],
+      verde:    [ item("Ensaladilla", 40), item("Frutos rojos", 20), item("Beterraga", 15) ],
+      lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
+      extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
+    },
+    3: {
+      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 700), item("Sardina", 250, { nota: "con espina — también aporta calcio" }) ],
+      viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
+      verde:    [ item("Ensaladilla", 60), item("Piña", 40), item("Zanahoria", 30) ],
+      lacteo:   [ yogur(100, 7) ],
+      extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
+    },
+    4: {
+      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 620, { nota: "hoy sin pescado" }) ],
+      viscera:  [ item("Corazón de pollo", 150) ],
+      verde:    [ item("Ensaladilla", 75), item("Plátano", null, { fijo: "1 unidad" }), item("Beterraga", 75) ],
+      lacteo:   [ yogur(100, 7), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
+      extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
+    },
+    5: {
+      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 600, { nota: "hoy sin pescado" }) ],
+      viscera:  [ item("Hígado de pollo", 150) ],
+      verde:    [ item("Ensaladilla", 75), item("Manzana", 50), item("Zanahoria", 75) ],
+      lacteo:   [ yogur(100, 7) ],
+      extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
+    },
+    6: {
+      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 675), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
+      verde:    [ item("Ensaladilla", 60), item("Frutos rojos", 30), item("Beterraga", 30) ],
+      lacteo:   [ yogur(75, 5), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
+      extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
+    },
+    0: {
+      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 700, { nota: "hoy sin pescado" }) ],
+      viscera:  [ item("Corazón de pollo", 150) ],
+      verde:    [ item("Ensaladilla", 75), item("Piña", 50), item("Zanahoria", 75) ],
+      lacteo:   [ yogur(100, 7) ],
+      extra:    [ item("Tomillo", null, { fijo: "½ cucharada" }) ]
+    }
+  };
+
+  /* Porcentaje del peso por edad. Los 6 meses están anclados al plan de Juanma
+     (28 kg → ~1.540 g/día ≈ 5,5 %); el resto sigue la referencia BARF de razas
+     grandes, que llegan a su peso adulto cerca de los 24 meses. */
+  var CURVA = [
+    { m: 2,  p: 0.100 }, { m: 3,  p: 0.085 }, { m: 4,  p: 0.075 },
+    { m: 5,  p: 0.065 }, { m: 6,  p: 0.055 }, { m: 7,  p: 0.050 },
+    { m: 8,  p: 0.046 }, { m: 9,  p: 0.042 }, { m: 10, p: 0.039 },
+    { m: 11, p: 0.036 }, { m: 12, p: 0.034 }, { m: 14, p: 0.031 },
+    { m: 16, p: 0.029 }, { m: 18, p: 0.028 }, { m: 24, p: 0.025 }
+  ];
+
+  var ACTIVIDAD = { baja: 0.9, normal: 1.0, alta: 1.2, muyalta: 1.35 };
+
+  // Proporción de hueso de cada corte, con el nombre que se pide en la carnicería
+  // holandesa. El objetivo es que el hueso quede cerca del 11 % del día.
+  var HUESO_OBJETIVO = 0.11;
+  var CORTES = [
+    { es: "Contramuslo", nl: "kipdij", p: 0.21 },
+    { es: "Cuarto trasero", nl: "kipbout", p: 0.27 },
+    { es: "Pollo entero", nl: "hele kip", p: 0.32 },
+    { es: "Pierna / muslo", nl: "drumstick", p: 0.33 },
+    { es: "Cuello de pollo", nl: "kippennek", p: 0.36 },
+    { es: "Cuello de pavo", nl: "kalkoennek", p: 0.42 },
+    { es: "Alitas", nl: "kippenvleugel", p: 0.45 },
+    { es: "Carcasa de pollo", nl: "kiprompje", p: 0.50 }
+  ];
+
+  function racionPara(meses) {
+    if (meses <= CURVA[0].m) return CURVA[0].p;
+    for (var i = CURVA.length - 1; i >= 0; i--) {
+      if (meses >= CURVA[i].m) {
+        if (i === CURVA.length - 1) return CURVA[i].p;
+        var a = CURVA[i], b = CURVA[i + 1];
+        return a.p + (b.p - a.p) * ((meses - a.m) / (b.m - a.m));
+      }
+    }
+    return CURVA[0].p;
+  }
+
+  /* ---------------------------------------------------------------
+     Estado
+     --------------------------------------------------------------- */
+  var CLAVE = "dieta-gigi-v2";
+  var cfg = {
+    nacimiento: "2025-11-27",
+    peso: 36,
+    actividad: "alta",
+    tomas: 3,
+    cosequin: true,
+    lupo: true,
+    vitE: true,
+    esterilizada: false
+  };
+
+  function cargar() {
+    try {
+      var crudo = localStorage.getItem(CLAVE);
+      if (crudo) {
+        var g = JSON.parse(crudo);
+        if (g && typeof g === "object") {
+          for (var k in cfg) if (Object.prototype.hasOwnProperty.call(g, k)) cfg[k] = g[k];
+        }
+      }
+    } catch (e) { /* storage bloqueado: seguimos con los valores de Gigi por defecto */ }
+  }
+  function guardar() {
+    try { localStorage.setItem(CLAVE, JSON.stringify(cfg)); } catch (e) {}
+  }
+
+  var CLAVE_TICKS = "dieta-gigi-ticks-v2";
+  function claveDeHoy() {
+    var d = new Date();
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  }
+  function leerTicks() {
+    try {
+      var c = JSON.parse(localStorage.getItem(CLAVE_TICKS) || "{}");
+      return (c && c.fecha === claveDeHoy()) ? (c.hechos || {}) : {};
+    } catch (e) { return {}; }
+  }
+  function escribirTicks(h) {
+    try { localStorage.setItem(CLAVE_TICKS, JSON.stringify({ fecha: claveDeHoy(), hechos: h })); } catch (e) {}
+  }
+
+  /* ---------------------------------------------------------------
+     Cálculo
+     --------------------------------------------------------------- */
+  function edadEnMeses() {
+    if (cfg.nacimiento) {
+      var n = new Date(cfg.nacimiento + "T00:00:00");
+      if (!isNaN(n.getTime())) {
+        var hoy = new Date();
+        var m = (hoy.getFullYear() - n.getFullYear()) * 12 + (hoy.getMonth() - n.getMonth());
+        if (hoy.getDate() < n.getDate()) m--;
+        return Math.max(2, m);
+      }
+    }
+    return REF_EDAD;
+  }
+
+  function factorActividad() {
+    return ACTIVIDAD[cfg.actividad] || 1.0;
+  }
+
+  // Tras la esterilización el gasto energético cae de forma marcada; si la ración
+  // no baja con él, el aumento de peso es cuestión de semanas.
+  function factorEsterilizacion() {
+    return cfg.esterilizada ? 0.8 : 1;
+  }
+
+  function factorEscala() {
+    var objetivo = (Number(cfg.peso) || REF_PESO) * racionPara(edadEnMeses()) *
+      factorActividad() * factorEsterilizacion();
+    var referencia = REF_PESO * racionPara(REF_EDAD); // el plan base asume actividad normal
+    return objetivo / referencia;
+  }
+
+  function redondear(g) {
+    return g >= 100 ? Math.round(g / 5) * 5 : Math.round(g);
+  }
+
+  function totalDelDia(dia, factor) {
+    var d = SEMANA[dia], total = 0;
+    ["proteina", "viscera", "verde", "lacteo", "extra"].forEach(function (k) {
+      d[k].forEach(function (it) {
+        if (it.g && it.unidad === "g") total += redondear(it.g * factor);
+      });
+    });
+    return total;
+  }
+
+  /* ---------------------------------------------------------------
+     Render
+     --------------------------------------------------------------- */
+  var DIAS_CORTO = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  var DIAS_LARGO = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  var diaVisible = new Date().getDay();
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function fmtFraccion(n) {
+    var e = Math.floor(n), frac = (n - e) >= 0.5 ? "½" : "";
+    if (e === 0) return frac || "0";
+    return e + (frac ? " " + frac : "");
+  }
+
+  function textoCantidad(it, factor) {
+    if (it.fijo) return esc(it.fijo);
+    var v = redondear(it.g * factor);
+    var html = v + " " + it.unidad;
+    if (it.equiv) {
+      var porCucharada = it.g / parseFloat(it.equiv);
+      var cda = Math.round((v / porCucharada) * 2) / 2;
+      if (cda >= 0.5) {
+        html += '<span class="equiv">≈ ' + fmtFraccion(cda) + " cucharada" + (cda === 1 ? "" : "s") + "</span>";
+      }
+    }
+    return html;
+  }
+
+  function filaHTML(it, factor, id, hechos) {
+    var chips = "";
+    if (it.confirmar) chips += '<span class="chip-confirmar">confirmar</span>';
+    if (it.reemplazo) chips += '<span class="chip-reemplazo">reemplaza</span>';
+    return '<li class="fila' + (hechos[id] ? " hecho" : "") + '">' +
+      '<input class="tick" type="checkbox" id="' + esc(id) + '" data-tick="' + esc(id) + '"' +
+        (hechos[id] ? " checked" : "") + ">" +
+      '<div class="fila-texto"><div class="ingrediente">' + esc(it.nombre) + chips + "</div>" +
+        (it.nota ? '<div class="nota-fila">' + esc(it.nota) + "</div>" : "") + "</div>" +
+      '<div class="cantidad">' + textoCantidad(it, factor) + "</div></li>";
+  }
+
+  function seccionHTML(titulo, items, factor, prefijo, hechos) {
+    if (!items.length) return "";
+    return '<section class="bloque"><h2 class="bloque-tit">' + esc(titulo) + "</h2>" +
+      '<ul class="lista">' + items.map(function (it, i) {
+        return filaHTML(it, factor, prefijo + "-" + i, hechos);
+      }).join("") + "</ul></section>";
+  }
+
+  function suplementosDelDia() {
+    var l = [];
+    l.push(item("Aceite de salmón", null, { fijo: "10 pulsaciones", nota: "del dosificador del envase" }));
+    if (cfg.vitE) {
+      l.push(item("Vitamina E", null, {
+        fijo: "200–400 UI",
+        nota: "junto con el aceite de salmón — dosis a confirmar con el veterinario",
+        confirmar: true
+      }));
+    }
+    if (cfg.lupo) {
+      l.push(item("Lupo Aktiv Biotine Complex", null, {
+        fijo: "Según etiqueta", nota: "dosis por peso del envase — cubre la biotina"
+      }));
+    }
+    if (cfg.cosequin) {
+      l.push(item("Cosequin Advance", null, {
+        fijo: "Según etiqueta", nota: "dosis por peso del envase — cubre la glucosamina"
+      }));
+    }
+    return l;
+  }
+
+  function renderRutina(total) {
+    var tomas = Number(cfg.tomas) || 3;
+    var pasos = [];
+    if (tomas === 3) {
+      pasos = [
+        { tipo: "ej", qué: "Juego y carrera · 1 h", cuando: "Sin comida en la hora previa" },
+        { tipo: "comida", qué: "Toma 1", cuando: "Al menos 1 h después de correr", parte: 0.40 },
+        { tipo: "comida", qué: "Toma 2", cuando: "Mediodía o media tarde", parte: 0.30 },
+        { tipo: "ej", qué: "Juego y carrera · 1 h", cuando: "Sin comida en la hora previa" },
+        { tipo: "comida", qué: "Toma 3", cuando: "Al menos 1 h después de correr", parte: 0.30 }
+      ];
+    } else {
+      pasos = [
+        { tipo: "ej", qué: "Juego y carrera · 1 h", cuando: "Sin comida en la hora previa" },
+        { tipo: "comida", qué: "Toma 1", cuando: "Al menos 1 h después de correr", parte: 0.50 },
+        { tipo: "ej", qué: "Juego y carrera · 1 h", cuando: "Sin comida en la hora previa" },
+        { tipo: "comida", qué: "Toma 2", cuando: "Al menos 1 h después de correr", parte: 0.50 }
+      ];
+    }
+    document.getElementById("rutina").innerHTML = pasos.map(function (p) {
+      var gramos = p.tipo === "comida"
+        ? '<div class="paso-gramos">' + redondear(total * p.parte) + " g</div>" : "";
+      return '<li class="paso' + (p.tipo === "ej" ? " ejercicio" : "") + '">' +
+        '<div class="paso-marca"><span class="bolita"></span></div>' +
+        '<div class="paso-cuerpo"><div class="paso-qué">' + esc(p["qué"]) + "</div>" +
+        '<div class="paso-cuando">' + esc(p.cuando) + "</div></div>" + gramos + "</li>";
+    }).join("");
+  }
+
+  function render() {
+    var factor = factorEscala();
+    var meses = edadEnMeses();
+    var hechos = leerTicks();
+    var d = SEMANA[diaVisible];
+    var hoy = new Date();
+    var total = totalDelDia(diaVisible, factor);
+
+    document.getElementById("fechaHoy").textContent =
+      DIAS_LARGO[hoy.getDay()] + " " + hoy.getDate() + "/" + (hoy.getMonth() + 1);
+    document.getElementById("vEdad").innerHTML = meses + '<span class="u">m</span>';
+    document.getElementById("vPeso").innerHTML = (Number(cfg.peso) || REF_PESO) + '<span class="u">kg</span>';
+    document.getElementById("vRacion").innerHTML =
+      ((total / ((Number(cfg.peso) || REF_PESO) * 1000)) * 100).toFixed(1).replace(".", ",") + '<span class="u">%</span>';
+    document.getElementById("vTotal").innerHTML =
+      (total / 1000).toFixed(2).replace(".", ",") + '<span class="u">kg</span>';
+
+    document.getElementById("dias").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(function (n) {
+      return '<button class="dia" type="button" data-dia="' + n + '" aria-pressed="' + (n === diaVisible) + '">' +
+        DIAS_CORTO[n] + (n === hoy.getDay() ? '<span class="hoy-punto"></span>' : "") + "</button>";
+    }).join("");
+
+    renderRutina(total);
+
+    var avisos = "";
+    if (cfg.cosequin || cfg.lupo) {
+      var r = [];
+      if (cfg.cosequin) r.push("la <strong>glucosamina</strong> la cubre Cosequin Advance");
+      if (cfg.lupo) r.push("la <strong>biotina</strong> la cubre Lupo Aktiv");
+      avisos += '<div class="aviso ojo"><span class="aviso-tit">Cambios sobre el plan original</span>' +
+        "Respecto del PDF de Juanma: " + r.join(", ") +
+        ", el atún diario pasó a sardina 3 veces por semana, y ya no se dan " +
+        "vitamina B, glucosamina suelta, colágeno ni aceite de coco. " +
+        "<strong>Si faltan en la lista, es a propósito.</strong></div>";
+    }
+    if (diaVisible !== hoy.getDay()) {
+      avisos += '<div class="aviso ojo">Estás viendo el <strong>' + DIAS_LARGO[diaVisible] +
+        "</strong>, no el día de hoy.</div>";
+    }
+    document.getElementById("avisos").innerHTML = avisos;
+
+    document.getElementById("plan").innerHTML =
+      seccionHTML("Carne y pescado", d.proteina, factor, "p", hechos) +
+      seccionHTML("Víscera del día", d.viscera, factor, "v", hechos) +
+      seccionHTML("Verduras y fruta", d.verde, factor, "g", hechos) +
+      seccionHTML("Yogur y especias", d.lacteo, factor, "l", hechos) +
+      seccionHTML("Extra del día", d.extra, factor, "e", hechos) +
+      seccionHTML("Aceites y suplementos", suplementosDelDia(), factor, "s", hechos);
+
+    var peso = Number(cfg.peso) || REF_PESO, act = factorActividad() * factorEsterilizacion();
+    document.querySelector("#tablaCortes tbody").innerHTML = CORTES.map(function (c) {
+      var gramos = Math.round(((total * HUESO_OBJETIVO) / c.p) / 5) * 5;
+      return "<tr><td>" + esc(c.es) + '<span class="corte-nl">' + esc(c.nl) + "</span></td><td>" +
+        Math.round(c.p * 100) + " %</td><td>" + gramos + " g</td></tr>";
+    }).join("");
+
+    document.querySelector("#tablaMeses tbody").innerHTML = CURVA.map(function (fila, i) {
+      var sig = CURVA[i + 1];
+      var activa = meses >= fila.m && (sig ? meses < sig.m : true);
+      var etiqueta = fila.m >= 24 ? "24 m +" : fila.m + " meses";
+      return "<tr" + (activa ? ' class="actual"' : "") + "><td>" + etiqueta + "</td><td>" +
+        (fila.p * 100).toFixed(1).replace(".", ",") + " %</td><td>" +
+        (peso * fila.p * act).toFixed(2).replace(".", ",") + " kg</td></tr>";
+    }).join("");
+  }
+
+  /* ---------------------------------------------------------------
+     Eventos
+     --------------------------------------------------------------- */
+  document.getElementById("dias").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-dia]");
+    if (!b) return;
+    diaVisible = Number(b.getAttribute("data-dia"));
+    render();
+  });
+
+  document.getElementById("plan").addEventListener("change", function (ev) {
+    var t = ev.target;
+    if (!t.matches("[data-tick]")) return;
+    var hechos = leerTicks();
+    if (t.checked) hechos[t.getAttribute("data-tick")] = 1;
+    else delete hechos[t.getAttribute("data-tick")];
+    escribirTicks(hechos);
+    var fila = t.closest(".fila");
+    if (fila) fila.classList.toggle("hecho", t.checked);
+  });
+
+  function enlazar(id, clave, transformar) {
+    var el = document.getElementById(id);
+    el.addEventListener("change", function () {
+      cfg[clave] = transformar ? transformar(el) : el.value;
+      guardar();
+      render();
+    });
+    return el;
+  }
+
+  cargar();
+
+  var elNac = enlazar("fNacimiento", "nacimiento");
+  var elPeso = enlazar("fPeso", "peso", function (el) { return Number(el.value) || REF_PESO; });
+  var elAct = enlazar("fActividad", "actividad");
+  var elTomas = enlazar("fTomas", "tomas", function (el) { return Number(el.value) || 3; });
+  var elEst = enlazar("fEsterilizada", "esterilizada", function (el) { return el.checked; });
+  var elVitE = enlazar("fVitE", "vitE", function (el) { return el.checked; });
+  var elCos = enlazar("fCosequin", "cosequin", function (el) { return el.checked; });
+  var elLupo = enlazar("fLupo", "lupo", function (el) { return el.checked; });
+
+  elNac.value = cfg.nacimiento || "";
+  elPeso.value = cfg.peso;
+  elAct.value = cfg.actividad;
+  elTomas.value = String(cfg.tomas);
+  elEst.checked = !!cfg.esterilizada;
+  elVitE.checked = !!cfg.vitE;
+  elCos.checked = !!cfg.cosequin;
+  elLupo.checked = !!cfg.lupo;
+
+  render();
+})();
+</script>
+
+</body>
+</html>
