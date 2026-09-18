@@ -230,6 +230,23 @@
   }
   .dia[aria-pressed="true"] .hoy-punto { background: currentColor; }
 
+  .sincro {
+    margin-top: 9px;
+    font-size: 11.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-3);
+  }
+  .sincro .punto {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    flex: 0 0 auto;
+  }
+  .sincro.compartido { color: var(--accent); }
+  .sincro.compartido .punto { background: var(--accent); }
+
   /* ---------- AVISOS ---------- */
   .aviso {
     border-radius: var(--r);
@@ -517,6 +534,7 @@
     </div>
   </div>
   <div class="dias" id="dias"></div>
+  <div class="sincro" id="sincro" hidden></div>
 </header>
 
 <main>
@@ -819,19 +837,105 @@
     try { localStorage.setItem(CLAVE, JSON.stringify(cfg)); } catch (e) {}
   }
 
+  /* ---------------------------------------------------------------
+     Lo ya servido hoy. Se guarda en el servidor para que todos en casa
+     vean lo mismo, y en el teléfono como respaldo: si el servidor no
+     responde la página sigue usable, solo deja de compartirse.
+     --------------------------------------------------------------- */
   var CLAVE_TICKS = "dieta-gigi-ticks-v2";
+  var hechos = {};
+  var compartido = false;
+  var ultimaSync = 0;
+
   function claveDeHoy() {
     var d = new Date();
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
-  function leerTicks() {
+  function leerLocal() {
     try {
       var c = JSON.parse(localStorage.getItem(CLAVE_TICKS) || "{}");
       return (c && c.fecha === claveDeHoy()) ? (c.hechos || {}) : {};
     } catch (e) { return {}; }
   }
-  function escribirTicks(h) {
-    try { localStorage.setItem(CLAVE_TICKS, JSON.stringify({ fecha: claveDeHoy(), hechos: h })); } catch (e) {}
+  function guardarLocal() {
+    try {
+      localStorage.setItem(CLAVE_TICKS, JSON.stringify({ fecha: claveDeHoy(), hechos: hechos }));
+    } catch (e) {}
+  }
+
+  function mismosHechos(a, b) {
+    var ka = Object.keys(a), kb = Object.keys(b);
+    if (ka.length !== kb.length) return false;
+    for (var i = 0; i < ka.length; i++) if (!b[ka[i]]) return false;
+    return true;
+  }
+
+  function pintarSincro() {
+    var el = document.getElementById("sincro");
+    el.hidden = false;
+    el.className = compartido ? "sincro compartido" : "sincro";
+    if (compartido) {
+      var seg = Math.round((Date.now() - ultimaSync) / 1000);
+      var cuando = seg < 10 ? "recién" : seg < 60 ? "hace " + seg + " s" :
+        "hace " + Math.round(seg / 60) + " min";
+      el.innerHTML = '<span class="punto"></span>Lo que marques lo ve toda la casa · ' + cuando;
+    } else {
+      el.innerHTML = '<span class="punto"></span>Solo en este teléfono — no se comparte';
+    }
+  }
+
+  function aplicarHechosADom() {
+    var casillas = document.querySelectorAll("[data-tick]");
+    for (var i = 0; i < casillas.length; i++) {
+      var c = casillas[i], marcado = !!hechos[c.getAttribute("data-tick")];
+      if (c.checked !== marcado) c.checked = marcado;
+      var fila = c.closest(".fila");
+      if (fila) fila.classList.toggle("hecho", marcado);
+    }
+  }
+
+  async function traerDelServidor() {
+    try {
+      var res = await fetch("/api/estado", { cache: "no-store" });
+      if (!res.ok) { compartido = false; pintarSincro(); return; }
+      var datos = await res.json();
+      var nuevos = (datos && datos.hechos) || {};
+      compartido = true;
+      ultimaSync = Date.now();
+      if (!mismosHechos(nuevos, hechos)) {
+        hechos = nuevos;
+        guardarLocal();
+        aplicarHechosADom();
+      }
+      pintarSincro();
+    } catch (e) {
+      compartido = false;
+      pintarSincro();
+    }
+  }
+
+  async function marcar(id, valor) {
+    // Se pinta primero y se manda después: quien marca no espera a la red.
+    if (valor) hechos[id] = 1; else delete hechos[id];
+    guardarLocal();
+    if (!compartido) return;
+    try {
+      var res = await fetch("/api/estado", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id, hecho: !!valor })
+      });
+      if (!res.ok) { compartido = false; pintarSincro(); return; }
+      var datos = await res.json();
+      hechos = (datos && datos.hechos) || hechos;
+      ultimaSync = Date.now();
+      guardarLocal();
+      aplicarHechosADom();
+      pintarSincro();
+    } catch (e) {
+      compartido = false;
+      pintarSincro();
+    }
   }
 
   /* ---------------------------------------------------------------
@@ -988,7 +1092,6 @@
   function render() {
     var factor = factorEscala();
     var meses = edadEnMeses();
-    var hechos = leerTicks();
     var d = SEMANA[diaVisible];
     var hoy = new Date();
     var total = totalDelDia(diaVisible, factor);
@@ -1064,12 +1167,9 @@
   document.getElementById("plan").addEventListener("change", function (ev) {
     var t = ev.target;
     if (!t.matches("[data-tick]")) return;
-    var hechos = leerTicks();
-    if (t.checked) hechos[t.getAttribute("data-tick")] = 1;
-    else delete hechos[t.getAttribute("data-tick")];
-    escribirTicks(hechos);
     var fila = t.closest(".fila");
     if (fila) fila.classList.toggle("hecho", t.checked);
+    marcar(t.getAttribute("data-tick"), t.checked);
   });
 
   function enlazar(id, clave, transformar) {
@@ -1102,7 +1202,21 @@
   elCos.checked = !!cfg.cosequin;
   elLupo.checked = !!cfg.lupo;
 
+  hechos = leerLocal();
   render();
+  pintarSincro();
+
+  // Se consulta al servidor al abrir, cada 10 s con la página a la vista, y al
+  // volver a ella: así quien esté en casa ve lo que marcó el otro sin recargar.
+  traerDelServidor();
+  setInterval(function () {
+    if (!document.hidden) traerDelServidor();
+  }, 10000);
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) traerDelServidor();
+  });
+  window.addEventListener("focus", traerDelServidor);
+  setInterval(function () { if (compartido) pintarSincro(); }, 15000);
 })();
 </script>
 
