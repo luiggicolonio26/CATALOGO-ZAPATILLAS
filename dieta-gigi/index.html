@@ -894,48 +894,81 @@
     }
   }
 
+  /* Cambios hechos acá que el servidor todavía no confirmó. Toda respuesta que
+     llega se fusiona sobre esto: una respuesta viaja por la red y llega con una
+     foto vieja del estado, así que sin esto pisaría las casillas marcadas
+     mientras iba en camino. */
+  var pendientes = {};
+  var cola = Promise.resolve();
+
+  function fusionar(delServidor) {
+    var r = {};
+    for (var k in delServidor) if (delServidor[k]) r[k] = 1;
+    for (var id in pendientes) {
+      if (pendientes[id]) r[id] = 1; else delete r[id];
+    }
+    return r;
+  }
+
+  function aceptar(delServidor) {
+    ultimaSync = Date.now();
+    var nuevos = fusionar(delServidor || {});
+    if (!mismosHechos(nuevos, hechos)) {
+      hechos = nuevos;
+      guardarLocal();
+      aplicarHechosADom();
+    }
+    pintarSincro();
+  }
+
   async function traerDelServidor() {
     try {
       var res = await fetch("/api/estado", { cache: "no-store" });
       if (!res.ok) { compartido = false; pintarSincro(); return; }
       var datos = await res.json();
-      var nuevos = (datos && datos.hechos) || {};
       compartido = true;
-      ultimaSync = Date.now();
-      if (!mismosHechos(nuevos, hechos)) {
-        hechos = nuevos;
-        guardarLocal();
-        aplicarHechosADom();
-      }
-      pintarSincro();
+      aceptar(datos && datos.hechos);
+      // Reintenta lo que quedó sin confirmar por un fallo de red anterior.
+      Object.keys(pendientes).forEach(function (id) {
+        cola = cola.then(function () { return enviar(id); });
+      });
     } catch (e) {
       compartido = false;
       pintarSincro();
     }
   }
 
-  async function marcar(id, valor) {
-    // Se pinta primero y se manda después: quien marca no espera a la red.
-    if (valor) hechos[id] = 1; else delete hechos[id];
-    guardarLocal();
-    if (!compartido) return;
+  async function enviar(id) {
+    if (!(id in pendientes)) return;
+    var valor = pendientes[id];
     try {
       var res = await fetch("/api/estado", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: id, hecho: !!valor })
+        body: JSON.stringify({ id: id, hecho: valor })
       });
       if (!res.ok) { compartido = false; pintarSincro(); return; }
       var datos = await res.json();
-      hechos = (datos && datos.hechos) || hechos;
-      ultimaSync = Date.now();
-      guardarLocal();
-      aplicarHechosADom();
-      pintarSincro();
+      // Solo deja de estar pendiente si nadie volvió a tocarla mientras iba.
+      if (pendientes[id] === valor) delete pendientes[id];
+      compartido = true;
+      aceptar(datos && datos.hechos);
     } catch (e) {
       compartido = false;
       pintarSincro();
     }
+  }
+
+  function marcar(id, valor) {
+    // Se pinta primero y se manda después: quien marca no espera a la red.
+    if (valor) hechos[id] = 1; else delete hechos[id];
+    guardarLocal();
+    // Queda pendiente aunque en este momento no haya conexión: si se descartara,
+    // el siguiente sondeo traería el estado del servidor —sin esta marca— y la
+    // borraría de la pantalla. Así espera y sube sola cuando vuelve la señal.
+    pendientes[id] = !!valor;
+    // En fila de a uno: dos envíos a la vez se leen y se pisan en el servidor.
+    cola = cola.then(function () { return enviar(id); });
   }
 
   /* ---------------------------------------------------------------
@@ -1029,11 +1062,22 @@
       '<div class="cantidad">' + textoCantidad(it, factor) + "</div></li>";
   }
 
-  function seccionHTML(titulo, items, factor, prefijo, hechos) {
+  var ACENTOS = new RegExp("[" + String.fromCharCode(0x0300) + "-" + String.fromCharCode(0x036f) + "]", "g");
+
+  /* El identificador sale del día y del nombre del ingrediente, no de su
+     posición: si se apaga un suplemento en Ajustes las posiciones se corren y
+     las marcas terminarían sobre el ingrediente equivocado. */
+  function idDe(dia, nombre) {
+    var limpio = String(nombre).normalize("NFD").replace(ACENTOS, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return dia + ":" + limpio.slice(0, 40);
+  }
+
+  function seccionHTML(titulo, items, factor, hechos) {
     if (!items.length) return "";
     return '<section class="bloque"><h2 class="bloque-tit">' + esc(titulo) + "</h2>" +
-      '<ul class="lista">' + items.map(function (it, i) {
-        return filaHTML(it, factor, prefijo + "-" + i, hechos);
+      '<ul class="lista">' + items.map(function (it) {
+        return filaHTML(it, factor, idDe(diaVisible, it.nombre), hechos);
       }).join("") + "</ul></section>";
   }
 
@@ -1130,12 +1174,12 @@
     document.getElementById("avisos").innerHTML = avisos;
 
     document.getElementById("plan").innerHTML =
-      seccionHTML("Carne y pescado", d.proteina, factor, "p", hechos) +
-      seccionHTML("Víscera del día", d.viscera, factor, "v", hechos) +
-      seccionHTML("Verduras y fruta", d.verde, factor, "g", hechos) +
-      seccionHTML("Yogur y especias", d.lacteo, factor, "l", hechos) +
-      seccionHTML("Extra del día", d.extra, factor, "e", hechos) +
-      seccionHTML("Aceites y suplementos", suplementosDelDia(), factor, "s", hechos);
+      seccionHTML("Carne y pescado", d.proteina, factor, hechos) +
+      seccionHTML("Víscera del día", d.viscera, factor, hechos) +
+      seccionHTML("Verduras y fruta", d.verde, factor, hechos) +
+      seccionHTML("Yogur y especias", d.lacteo, factor, hechos) +
+      seccionHTML("Extra del día", d.extra, factor, hechos) +
+      seccionHTML("Aceites y suplementos", suplementosDelDia(), factor, hechos);
 
     var peso = Number(cfg.peso) || REF_PESO, act = factorActividad() * factorEsterilizacion();
     document.querySelector("#tablaCortes tbody").innerHTML = CORTES.map(function (c) {
