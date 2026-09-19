@@ -358,6 +358,18 @@
     transform: rotate(42deg);
   }
   .tick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* Fila de algo que hoy no corresponde dar: ocupa el mismo lugar que las demás
+     pero sin casilla, para que se lea de un vistazo que no está pendiente. */
+  .tick-hueco {
+    flex: 0 0 auto;
+    width: 28px; height: 28px;
+    margin: 1px 0 0;
+    border: 2px dashed var(--line);
+    border-radius: 50%;
+  }
+  .fila.inactiva .ingrediente,
+  .fila.inactiva .cantidad { color: var(--ink-3); font-weight: 600; }
+  .fila.inactiva .cantidad { font-family: var(--font-body); font-size: 13px; }
   .fila-texto { flex: 1; min-width: 0; }
   .ingrediente { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; }
   .nota-fila { font-size: 12.5px; color: var(--ink-3); margin-top: 1px; }
@@ -642,7 +654,8 @@
       <div class="fila-check">
         <input type="checkbox" id="fVitE">
         <label for="fVitE"><span>Le damos <strong>Vitamina E</strong>
-          <small>Compensa el desgaste que produce el aceite de pescado.</small></span></label>
+          <small>Compensa el desgaste que produce el aceite de pescado. Va un día sí y un día
+          no, según indicó el veterinario; la lista ya lo tiene en cuenta.</small></span></label>
       </div>
       <div class="fila-check">
         <input type="checkbox" id="fCosequin">
@@ -678,22 +691,27 @@
     día siguiente. Si en algún momento la esterilizan, activá la casilla en Ajustes — el gasto
     energético baja bastante y la ración tiene que bajar con él.</p>
 
-    <p><strong>Por qué el pollo va partido en dos.</strong> El contramuslo trae cerca del 21 % de
-    su peso en hueso. Si todo el pollo del día fuera contramuslo con hueso, el aporte se iría al
-    14–17 % de la dieta; partido en dos queda entre 8 y 13 %, que es donde conviene tenerlo
-    mientras Gigi siga creciendo. Es el mismo corte comprado de las dos formas —con hueso y en
-    filete— así que sigue siendo una sola compra. <strong>Pesá cada parte por separado</strong>,
-    no las intercambies.</p>
+    <p><strong>Por qué hay dos carnes y no una.</strong> El contramuslo trae cerca del 21 % de su
+    peso en hueso. Si toda la carne del día fuera contramuslo, el hueso se iría al 14–17 % de la
+    dieta; repartido con carne molida queda entre 8 y 13 %, que es donde conviene tenerlo mientras
+    Gigi siga creciendo. El contramuslo pone el hueso, la carne molida completa el resto.
+    <strong>Pesá cada parte por separado</strong>, no las intercambies.</p>
 
     <p><strong>Por qué contramuslo y no alitas.</strong> El ala es casi la mitad hueso (45 %), así
     que para llegar al hueso del día alcanza con muy poca — y son piezas chicas que una perra de
     36 kg traga casi enteras, sin masticar. El contramuslo da mucha más carne por pieza, la obliga
     a masticar de verdad, y al tener menos hueso por gramo es más fácil no pasarse de calcio.</p>
 
+    <p><strong>Sobre la carne molida.</strong> Va cruda, como el resto. Lo más simple de conseguir
+    es <em>rundergehakt</em> de vaca, y conviene pedirlo <strong>magro</strong>: la ración ya trae
+    grasa del contramuslo con piel y del aceite de salmón. Se puede rotar con pavo, cordero o
+    conejo — variar la proteína es mejor que darle siempre lo mismo. Si solo conseguís
+    <em>half-om-half</em>, que lleva cerdo, congelalo tres semanas antes de dárselo; el cerdo crudo
+    es el único que pide esa precaución.</p>
+
     <p><strong>Qué hueso nunca.</strong> Solo huesos de ave o conejo, y siempre crudos: el hueso
     cocido se astilla. Nada de huesos de carga de vaca o cordero (fémur, caña) — son tan duros que
-    parten dientes. Para variar la carne sin hueso podés usar vaca, pavo, cordero o conejo: rotar
-    proteínas es mejor que darle siempre pollo.</p>
+    parten dientes.</p>
 
     <p><strong>Cómo comprobar que el hueso está bien.</strong> Miralo en las heces: si salen muy
     duras, blanquecinas y desmenuzables, hay hueso de más. Si salen muy blandas, falta. No agregues
@@ -725,7 +743,8 @@
     return {
       nombre: nombre, g: gramos, unidad: opt.unidad || "g",
       equiv: opt.equiv || null, nota: opt.nota || null,
-      fijo: opt.fijo || null, confirmar: !!opt.confirmar, reemplazo: false
+      fijo: opt.fijo || null, confirmar: !!opt.confirmar, reemplazo: false,
+      inactivo: !!opt.inactivo
     };
   }
   function yogur(gramos, cucharadas) {
@@ -734,49 +753,49 @@
 
   var SEMANA = {
     1: {
-      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 255, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 255, { nota: "de vaca magra — rundergehakt" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Molleja de pollo", 150) ],
       verde:    [ item("Ensaladilla", 105), item("Manzana", 60), item("Zanahoria", 45) ],
       lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
       extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
     },
     2: {
-      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 295, { nota: "kipdijfilet — hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 295, { nota: "de vaca magra — rundergehakt · hoy sin pescado" }) ],
       viscera:  [ item("Hígado de pollo", 150) ],
       verde:    [ item("Ensaladilla", 40), item("Frutos rojos", 20), item("Beterraga", 15) ],
       lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
       extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
     },
     3: {
-      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 355, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 250, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 355, { nota: "de vaca magra — rundergehakt" }), item("Sardina", 250, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
       verde:    [ item("Ensaladilla", 60), item("Piña", 40), item("Zanahoria", 30) ],
       lacteo:   [ yogur(100, 7) ],
       extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
     },
     4: {
-      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 165, { nota: "kipdijfilet — hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 165, { nota: "de vaca magra — rundergehakt · hoy sin pescado" }) ],
       viscera:  [ item("Corazón de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Plátano", null, { fijo: "1 unidad" }), item("Beterraga", 75) ],
       lacteo:   [ yogur(100, 7), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
       extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
     },
     5: {
-      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 145, { nota: "kipdijfilet — hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 145, { nota: "de vaca magra — rundergehakt · hoy sin pescado" }) ],
       viscera:  [ item("Hígado de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Manzana", 50), item("Zanahoria", 75) ],
       lacteo:   [ yogur(100, 7) ],
       extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
     },
     6: {
-      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 330, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 330, { nota: "de vaca magra — rundergehakt" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
       verde:    [ item("Ensaladilla", 60), item("Frutos rojos", 30), item("Beterraga", 30) ],
       lacteo:   [ yogur(75, 5), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
       extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
     },
     0: {
-      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 245, { nota: "kipdijfilet — hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Carne molida", 245, { nota: "de vaca magra — rundergehakt · hoy sin pescado" }) ],
       viscera:  [ item("Corazón de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Piña", 50), item("Zanahoria", 75) ],
       lacteo:   [ yogur(100, 7) ],
@@ -1086,6 +1105,17 @@
     var chips = "";
     if (it.confirmar) chips += '<span class="chip-confirmar">confirmar</span>';
     if (it.reemplazo) chips += '<span class="chip-reemplazo">reemplaza</span>';
+
+    // Lo que hoy no toca se muestra igual, sin casilla: así queda claro que no
+    // se olvidó nadie de darlo, simplemente no corresponde hoy.
+    if (it.inactivo) {
+      return '<li class="fila inactiva">' +
+        '<span class="tick-hueco" aria-hidden="true"></span>' +
+        '<div class="fila-texto"><div class="ingrediente">' + esc(it.nombre) + "</div>" +
+          (it.nota ? '<div class="nota-fila">' + esc(it.nota) + "</div>" : "") + "</div>" +
+        '<div class="cantidad">' + esc(it.fijo) + "</div></li>";
+    }
+
     return '<li class="fila' + (hechos[id] ? " hecho" : "") + '">' +
       '<input class="tick" type="checkbox" id="' + esc(id) + '" data-tick="' + esc(id) + '"' +
         (hechos[id] ? " checked" : "") + ">" +
@@ -1113,15 +1143,40 @@
       }).join("") + "</ul></section>";
   }
 
+  /* Fecha real del día que se está mirando. Los botones muestran la semana en
+     curso, de lunes a domingo, así que el día visible es el de esta semana. */
+  function fechaDelDiaVisible() {
+    var f = new Date();
+    f.setHours(12, 0, 0, 0); // mediodía: así el cambio de horario no corre el día
+    var alLunes = (f.getDay() + 6) % 7;
+    var orden = [1, 2, 3, 4, 5, 6, 0].indexOf(diaVisible);
+    f.setDate(f.getDate() - alLunes + orden);
+    return f;
+  }
+
+  /* La vitamina E va un día sí y un día no, como indicó el veterinario. Se
+     decide por la fecha y no por el día de la semana: si dependiera del día de
+     la semana, al cambiar de semana caerían dos seguidos o se saltaría uno. */
+  function tocaVitE() {
+    // La paridad está elegida para que el 19/9/2026 —el día que el veterinario
+    // lo indicó— sea día de darla. A partir de ahí se alterna sola.
+    return Math.floor(fechaDelDiaVisible().getTime() / 86400000) % 2 === 1;
+  }
+
   function suplementosDelDia() {
     var l = [];
     l.push(item("Aceite de salmón", null, { fijo: "10 pulsaciones", nota: "del dosificador del envase" }));
     if (cfg.vitE) {
-      l.push(item("Vitamina E", null, {
-        fijo: "200–400 UI",
-        nota: "junto con el aceite de salmón — dosis a confirmar con el veterinario",
-        confirmar: true
-      }));
+      l.push(tocaVitE()
+        ? item("Vitamina E", null, {
+            fijo: "200–400 UI",
+            nota: "hoy toca — un día sí y un día no, como indicó el veterinario"
+          })
+        : item("Vitamina E", null, {
+            fijo: "hoy no toca",
+            nota: "va un día sí y un día no — le toca mañana",
+            inactivo: true
+          }));
     }
     if (cfg.lupo) {
       l.push(item("Lupo Aktiv Biotine Complex", null, {
@@ -1196,7 +1251,9 @@
       avisos += '<div class="aviso ojo"><span class="aviso-tit">Cambios sobre el plan original</span>' +
         "Respecto del PDF de Juanma: " + r.join(", ") +
         ", el atún diario pasó a sardina 3 veces por semana, el pollo con hueso pasó de " +
-        "alitas a <strong>contramuslo</strong>, y ya no se dan " +
+        "alitas a <strong>contramuslo</strong>, el pollo deshuesado pasó a " +
+        "<strong>carne molida</strong>, la <strong>vitamina E</strong> va un día sí y un día " +
+        "no por indicación del veterinario, y ya no se dan " +
         "vitamina B, glucosamina suelta, colágeno ni aceite de coco. " +
         "<strong>Si faltan en la lista, es a propósito.</strong></div>";
     }
