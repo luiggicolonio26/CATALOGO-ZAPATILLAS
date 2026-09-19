@@ -416,6 +416,14 @@
   td { font-family: var(--font-mono); font-weight: 500; }
   td:first-child { font-family: var(--font-body); font-weight: 600; }
   tr.actual td { background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+  /* Va dentro de la línea del nombre holandés a propósito: como etiqueta aparte
+     ensanchaba la columna y en móvil cortaba los gramos. */
+  .corte-uso {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent);
+  }
   .corte-nl {
     display: block;
     font-family: var(--font-mono);
@@ -575,9 +583,11 @@
   <section class="bloque">
     <h2 class="bloque-tit">Si cambiás de corte</h2>
     <p class="ayuda" style="margin:8px 0 0;">
-      Lo que importa no es qué parte del pollo sea, sino <strong>cuánto hueso trae</strong>. Cada
-      corte trae una proporción distinta, así que la cantidad cambia. Esta columna te dice cuánto
-      poner hoy para que el hueso quede igual — el resto del día se completa con carne sin hueso.
+      Si un día no consigue contramuslo, se puede usar otro corte: lo que importa no es qué parte
+      del pollo sea, sino <strong>cuánto hueso trae</strong>. Cada corte trae una proporción
+      distinta, así que la cantidad cambia. Esta columna dice cuánto poner <em>hoy</em> de cada uno
+      para que el hueso quede igual que en el plan — el resto del día se completa con carne sin
+      hueso hasta llegar al total.
     </p>
     <div class="tabla-wrap">
       <table id="tablaCortes">
@@ -668,11 +678,17 @@
     día siguiente. Si en algún momento la esterilizan, activá la casilla en Ajustes — el gasto
     energético baja bastante y la ración tiene que bajar con él.</p>
 
-    <p><strong>Por qué el pollo va partido en dos.</strong> Las alitas son de las piezas con más
-    hueso (cerca del 45 % de su peso). Si todo el pollo del día fueran alitas, el hueso llegaría al
-    25–35 % de la dieta, cuando la referencia es 10–15 %. Por eso las alitas quedan como la parte
-    con hueso y el resto va deshuesado: así el aporte queda entre 8 y 13 %. <strong>Pesalas por
-    separado</strong>, no las intercambies.</p>
+    <p><strong>Por qué el pollo va partido en dos.</strong> El contramuslo trae cerca del 21 % de
+    su peso en hueso. Si todo el pollo del día fuera contramuslo con hueso, el aporte se iría al
+    14–17 % de la dieta; partido en dos queda entre 8 y 13 %, que es donde conviene tenerlo
+    mientras Gigi siga creciendo. Es el mismo corte comprado de las dos formas —con hueso y en
+    filete— así que sigue siendo una sola compra. <strong>Pesá cada parte por separado</strong>,
+    no las intercambies.</p>
+
+    <p><strong>Por qué contramuslo y no alitas.</strong> El ala es casi la mitad hueso (45 %), así
+    que para llegar al hueso del día alcanza con muy poca — y son piezas chicas que una perra de
+    36 kg traga casi enteras, sin masticar. El contramuslo da mucha más carne por pieza, la obliga
+    a masticar de verdad, y al tener menos hueso por gramo es más fácil no pasarse de calcio.</p>
 
     <p><strong>Qué hueso nunca.</strong> Solo huesos de ave o conejo, y siempre crudos: el hueso
     cocido se astilla. Nada de huesos de carga de vaca o cordero (fémur, caña) — son tan duros que
@@ -718,49 +734,49 @@
 
   var SEMANA = {
     1: {
-      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 600), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 255, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Molleja de pollo", 150) ],
       verde:    [ item("Ensaladilla", 105), item("Manzana", 60), item("Zanahoria", 45) ],
       lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
       extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
     },
     2: {
-      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 750, { nota: "hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 295, { nota: "kipdijfilet — hoy sin pescado" }) ],
       viscera:  [ item("Hígado de pollo", 150) ],
       verde:    [ item("Ensaladilla", 40), item("Frutos rojos", 20), item("Beterraga", 15) ],
       lacteo:   [ yogur(75, 5), item("Canela", null, { fijo: "al gusto", nota: "espolvoreada sobre el yogur" }) ],
       extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
     },
     3: {
-      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 700), item("Sardina", 250, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 355, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 250, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
       verde:    [ item("Ensaladilla", 60), item("Piña", 40), item("Zanahoria", 30) ],
       lacteo:   [ yogur(100, 7) ],
       extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
     },
     4: {
-      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 620, { nota: "hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 165, { nota: "kipdijfilet — hoy sin pescado" }) ],
       viscera:  [ item("Corazón de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Plátano", null, { fijo: "1 unidad" }), item("Beterraga", 75) ],
       lacteo:   [ yogur(100, 7), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
       extra:    [ item("Orégano", 15, { equiv: "1 cucharada" }) ]
     },
     5: {
-      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 600, { nota: "hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 145, { nota: "kipdijfilet — hoy sin pescado" }) ],
       viscera:  [ item("Hígado de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Manzana", 50), item("Zanahoria", 75) ],
       lacteo:   [ yogur(100, 7) ],
       extra:    [ item("Huevo con cáscara", null, { fijo: "1 unidad", nota: "cáscara molida incluida — es su calcio" }) ]
     },
     6: {
-      proteina: [ item("Alitas de pollo", 300, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 675), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
+      proteina: [ item("Contramuslo con hueso", 645, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 330, { nota: "kipdijfilet — o vaca, pavo o cordero" }), item("Sardina", 300, { nota: "con espina — también aporta calcio" }) ],
       viscera:  [ item("Caldo de verduras", 300, { unidad: "ml" }) ],
       verde:    [ item("Ensaladilla", 60), item("Frutos rojos", 30), item("Beterraga", 30) ],
       lacteo:   [ yogur(75, 5), item("Cúrcuma con pimienta", null, { fijo: "una pizca", nota: "la pimienta ayuda a absorber la cúrcuma" }) ],
       extra:    [ item("Polen de abeja", 15, { equiv: "1 cucharada" }) ]
     },
     0: {
-      proteina: [ item("Alitas de pollo", 400, { nota: "la parte con hueso del día" }), item("Pollo sin hueso", 700, { nota: "hoy sin pescado" }) ],
+      proteina: [ item("Contramuslo con hueso", 855, { nota: "kipdij — es el hueso del día" }), item("Contramuslo sin hueso", 245, { nota: "kipdijfilet — hoy sin pescado" }) ],
       viscera:  [ item("Corazón de pollo", 150) ],
       verde:    [ item("Ensaladilla", 75), item("Piña", 50), item("Zanahoria", 75) ],
       lacteo:   [ yogur(100, 7) ],
@@ -782,8 +798,8 @@
   var ACTIVIDAD = { baja: 0.9, normal: 1.0, alta: 1.2, muyalta: 1.35 };
 
   // Proporción de hueso de cada corte, con el nombre que se pide en la carnicería
-  // holandesa. El objetivo es que el hueso quede cerca del 11 % del día.
-  var HUESO_OBJETIVO = 0.11;
+  // holandesa. El plan apunta a que el hueso quede entre el 8 y el 13 % del día,
+  // más abajo los días de sardina porque la espina ya aporta calcio.
   var CORTES = [
     { es: "Contramuslo", nl: "kipdij", p: 0.21 },
     { es: "Cuarto trasero", nl: "kipbout", p: 0.27 },
@@ -1008,6 +1024,22 @@
     return g >= 100 ? Math.round(g / 5) * 5 : Math.round(g);
   }
 
+  /* Gramos de hueso que lleva el día: los que aporta la pieza con hueso del plan.
+     Se busca por el corte que nombra, así que si algún día cambia de corte hay
+     que agregarlo a CORTES y el resto se acomoda solo. */
+  function huesoDelPlan(d, factor) {
+    var hueso = 0;
+    d.proteina.forEach(function (it) {
+      if (!it.g || it.unidad !== "g") return;
+      CORTES.forEach(function (c) {
+        if (it.nombre.indexOf(c.es) === 0 && it.nombre.indexOf("sin hueso") < 0) {
+          hueso += redondear(it.g * factor) * c.p;
+        }
+      });
+    });
+    return hueso;
+  }
+
   function totalDelDia(dia, factor) {
     var d = SEMANA[dia], total = 0;
     ["proteina", "viscera", "verde", "lacteo", "extra"].forEach(function (k) {
@@ -1163,7 +1195,8 @@
       if (cfg.lupo) r.push("la <strong>biotina</strong> la cubre Lupo Aktiv");
       avisos += '<div class="aviso ojo"><span class="aviso-tit">Cambios sobre el plan original</span>' +
         "Respecto del PDF de Juanma: " + r.join(", ") +
-        ", el atún diario pasó a sardina 3 veces por semana, y ya no se dan " +
+        ", el atún diario pasó a sardina 3 veces por semana, el pollo con hueso pasó de " +
+        "alitas a <strong>contramuslo</strong>, y ya no se dan " +
         "vitamina B, glucosamina suelta, colágeno ni aceite de coco. " +
         "<strong>Si faltan en la lista, es a propósito.</strong></div>";
     }
@@ -1182,9 +1215,19 @@
       seccionHTML("Aceites y suplementos", suplementosDelDia(), factor, hechos);
 
     var peso = Number(cfg.peso) || REF_PESO, act = factorActividad() * factorEsterilizacion();
+    // La tabla se calcula sobre el hueso que realmente lleva el día, no sobre un
+    // porcentaje fijo: los días con sardina llevan menos hueso porque la espina ya
+    // aporta calcio, y si no se mirara eso la tabla contradiría al plan de arriba.
+    var huesoDelDia = huesoDelPlan(d, factor);
     document.querySelector("#tablaCortes tbody").innerHTML = CORTES.map(function (c) {
-      var gramos = Math.round(((total * HUESO_OBJETIVO) / c.p) / 5) * 5;
-      return "<tr><td>" + esc(c.es) + '<span class="corte-nl">' + esc(c.nl) + "</span></td><td>" +
+      var gramos = Math.round((huesoDelDia / c.p) / 5) * 5;
+      // El contramuslo es el que ya está en el plan; se marca para no confundirlo
+      // con las alternativas de la misma tabla.
+      var usado = c.es === "Contramuslo";
+      return "<tr" + (usado ? ' class="actual"' : "") + "><td>" + esc(c.es) +
+        '<span class="corte-nl">' + esc(c.nl) +
+        (usado ? '<em class="corte-uso"> · el que le das</em>' : "") +
+        "</span></td><td>" +
         Math.round(c.p * 100) + " %</td><td>" + gramos + " g</td></tr>";
     }).join("");
 
